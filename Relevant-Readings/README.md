@@ -76,6 +76,7 @@
 - Stochastic Calculus and Applications, Samuel N. Cohen and Robert J. Elliott
 - Stochastic Differential Equations, Bernt Oksendal
 - Diffusions Markov Processes and Martingales, L. C. G. Roger and D. Williams
+- 50 Challenging Problems in Probability
 
 ### Statistics:
 
@@ -93,11 +94,16 @@
 - Reinforcement Learning: An introduction, Richard S. Sutton and Andrew G. Barto
 - Advances in Financial Machine Learning, Marcos Lopez de Prado
 
+### Linear Algebra:
+- Linear Algebra by Gilbert Strang
+- Advanced Engineering Mathematics by Erwin Kreyszig
+
 ### Programming
 - C++ Design Patterns and Derivatives Pricing, Mark Joshi
 - Python for Data Analysis, Wes McKinney
 - Applied Computational Economics and Finance, Mario J. Miranda and Paul L. Fackler
 - Modern Computational Finance, Antoine Savine
+- Introduction to Algorithms by Cormen
 
 ## Interviews
 - Quant Job Interview Questions and Answers, Mark Joshi
