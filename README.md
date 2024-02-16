@@ -1,3 +1,3 @@
 # Amherst College Quant Club Resources
 
-For more ML/AI resources, refer https://aman.ai
+Since AI/ML is so popular these days, we suggest you to refer https://aman.ai for more ML/AI resources.
