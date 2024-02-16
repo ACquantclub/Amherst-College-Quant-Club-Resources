@@ -1,0 +1,103 @@
+---
+title: "Random Walk on a Circle"
+author: "Math 365 Tanya Leise"
+date: "February 28, 2022"
+output:
+  html_document: default
+---
+
+Submit your completed lab to Moodle as a pdf or html document.
+
+The objective of this lab is to continue exploring behavior of Markov chains, building on an example from class. Feel free to discuss problems with each other during lab, as well as ask me questions. (\emph{Problems adapted from Ross's Introduction to Probability Models.})
+
+
+#### Further analysis of random walk on a circle
+
+A particle moves among $N$ vertices $\{1,2,\cdots,N\}$ arranged on a circle (increasing numbers go counterclockwise). At each step, it moves either one step counterclockwise with probability $p$ or one step clockwise with probability $q=1-p$. Assume $X_0=1$.
+
+1. Run a simulation (paste the R code below into the terminal or regular R script to see it as a movie, increasing nsteps to 100):
+
+```{r}
+nsteps <- 4
+nvertices <- 20
+p <- 0.5
+coinflips <- sample(c(-1,1), nsteps, replace=TRUE, c(1-p,p))
+walk <- cumsum(c(0,coinflips))
+theta <- seq(from=0, to=2*pi, by=.01)
+for (k in 1:nsteps) {
+  plot(cos(theta), sin(theta), type="l", ylim=c(-1.2,1.2),
+       asp=1, col="blue", xlab="", ylab="", main=paste("Time step",k))
+  points(cos(walk[k]*2*pi/nvertices), sin(walk[k]*2*pi/nvertices), col="red", pch=19)
+  Sys.sleep(0.1)
+}
+```
+
+2. Experiment with running the simulation for different values of $p$. Is the particle more or less likely to make it around the circle as $p$ increases from 1/2 toward 1?
+
+Sol: The particle is more likely to make it around the circle as p increases from 1/2 towards 1.
+
+3. Verify that $\pi_i=1/N$ for all vertices $i$ (check that $\mathbf{\pi P}=\mathbf{\pi}$ for $\mathbf{\pi}=[\frac{1}{N} \cdots \frac{1}{N}]$).
+
+Ans: Whatever the P matrix is, its columns should sum to 1 because there will be one entry of $(1-p)$, one entry of $p$, and rest of the entries would be zero. Hence, for $\mathbf{\pi}=[\frac{1}{N} \cdots \frac{1}{N}]$, the equation $\mathbf{\pi P}=\mathbf{\pi}$ holds. 
+
+4. Let $T$ be the time of first return to state 1. Find the expected value $\mathbb{E}(T| X_0=1)$.
+
+Ans: $\pi_i=1/N$ implies expected value of time of return to state 1 equals $1/(1/N) = N$
+
+5. Find the probability that all other positions are visited before the particle returns to its starting state at time $T$, for cases $p=\frac{1}{2}$ and $p\ne\frac{1}{2}$. (Break down into sum of conditional probabilities based on 1st step, and use gambler's ruin result.)
+
+Ans: In the case when the p is half, probability is $(1/2)*(1/(N-1)) + (1/2)*(1/(N-1)) = \frac{1}{(N-1)}$
+
+In the case when p is not equal to half, the probability is $((p*((1-((1-p)/p))/(1-((1-p)/p)^{N-1}))) + (q*((1-((1-q)/q))/(1-((1-q)/q)^{N-1}))))$ where $q=1-p$
+```{r}
+##### Please ignore this commented part for grading purposes #######
+#gamble <- function(k,n,p) {
+#	stake <- k
+#	while (stake > 0 & stake < n) {
+#		bet <- sample(c(-1,1),1,prob=c(1-p,p))
+#		stake <- stake + bet
+#	}
+#	if (stake == 0) return(1) else return(0)
+#}   
+
+#probability_on_circle <- function(n_trials,N,p) {
+#  simulation_list_left <- replicate(n_trials,gamble(1,N-1,p))
+#  simulation_list_right <- replicate(n_trials,gamble(N-1,1,1-p))
+#  gamblers_ruin_left <- mean(simulation_list_left)
+#  gamblers_ruin_right <- mean(simulation_list_right)
+#  probability <- p * gamblers_ruin_left + (1-p) * gamblers_ruin_right
+#  return(probability)
+#}
+
+#probability_on_circle(10000,1000,0.5)
+
+#probability_on_circle <- function(N,p) {
+#  return ((p^(N-1) + (1-p)^(N-1))/(p^(N-1) - #(1-p)^(N-1)))*(2*p - 1)
+#}
+######################################################
+probability_on_circle <- function(N,p) {
+  q = 1-p
+  return ((p*((1-((1-p)/p))/(1-((1-p)/p)^(N-1)))) + (q*((1-((1-q)/q))/(1-((1-q)/q)^(N-1)))))
+}
+
+
+```
+
+
+6. For values $p=0.5$, $0.6$, $0.9$, with $N=20$, calculate the probability you found in the previous exercise. What happens as $p$ increases toward 1? Why does this make sense?
+
+Sol: As p approaches 1, I expect to see a higher probability of returning to the vertex after visiting all other positions on the circle. When p is 1, there is a 100% chance that the particle will come back to the same position after going round the circle as it never turns back because q = 0.
+```{r}
+print("Probability for p = 0.5 is ...") 
+prob_0.5 <- 1/19
+prob_0.5
+print("Probability for p = 0.6 is ...")
+prob_0.6 <- probability_on_circle(20,0.6)
+prob_0.6
+print("Probability for p = 0.9 is ...")
+prob_0.9 <- probability_on_circle(20,0.9)
+prob_0.9
+print("Probability for p = 1 is ...")
+prob_1 <- probability_on_circle(20,0.9999999)
+prob_1
+```

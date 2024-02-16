@@ -1,0 +1,49 @@
+---
+title: "IntroRRmd"
+author: "dm"
+date: "1/31/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+```{r coin-flips}
+# Coin flips
+n <- 1000 # Number of coin flips
+coinflips <- sample(0:1,n,replace=TRUE)
+coinflips
+heads <- cumsum(coinflips)
+prop <- heads/(1:n)
+plot(1:n,prop)
+
+plot(1:n,prop,type="l",xlab="Number of coin flips",
+ylab="Running average",main="Proportion heads")
+abline(h=0.5)
+```
+
+```{r random-walks}
+# Bernoulli process random walk (heads move to right, tails move to left)
+n <- 100 # Number of steps
+coinflips <- sample(c(-1,1),n,replace=TRUE)
+walk <- cumsum(coinflips) # position after each flip
+for (k in 1:n) {
+plot(1:k, walk[1:k],xlim=c(1,n),ylim=c(-n/5,n/5),type="l",xlab="Step",ylab="Position") 
+Sys.sleep(0.1) 
+# short pause so can watch random walk step by step 
+}
+
+n <- 100000
+coinflips <- sample(c(-1,1),n,replace=TRUE)
+walk <- cumsum(coinflips)
+plot(1:n, walk,xlim=c(1,n),type="l",xlab="Step",ylab="Position")
+
+hist(walk, main=paste(n, "step random walk with mean", round(mean(walk),3)))
+```
+
+```{r appendix A}
+# DONE 3.1, 3.2, 4.1, 4.4, 8.2, 9.1, 9.2
+
+```

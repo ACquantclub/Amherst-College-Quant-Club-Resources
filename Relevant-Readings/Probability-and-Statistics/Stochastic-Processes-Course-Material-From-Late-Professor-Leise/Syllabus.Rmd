@@ -1,0 +1,65 @@
+---
+title: "syllabus"
+author: "dm"
+date: "1/31/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Course goals:
+
+Study the theory underlying both discrete-time and continuous-time stochastic processes.
+Learn how to use R and RStudio to simulate the stochastic processes as we learn about them.
+Course topics:
+Markov chains (finite, countable, and continuous-time flavors)
+Markov chain Monte Carlo
+Branching processes
+Poisson processes
+Martingales
+Brownian motion
+Stochastic calculus
+Textbook: Introduction to Stochastic Processes with R by R. Dobrow, available in eReserves
+
+Class meeting times: Mon 12-12:50pm in SMudd 204 and Tues/Thursday 11:30am-12:50pm in SMudd 205. The first week will be via Zoom (see Moodle Zoom links), then starting Feb 14 we'll meet in person.
+
+Office hours: Mondays and Thursdays 2-2:50pm in Mudd 503; other times by appointment -- feel free to email me to set up a time to meet. Also feel free to stick around after class to ask questions and get help.
+Attendance: Class will be chock full of material and activities -- cooperative learning is more effective and more fun than struggling through material on your own.
+
+My condition and a request: I have been undergoing chemotherapy for cancer since September (you may notice I will carry a minipump every other Thursday),  which leaves me vulnerable to viruses, including the common cold, with potentially serious consequences. Please wear your mask covering your nose and mouth while in the same room with me, and do not attend class if you are feeling ill.  I will not take attendance and there is no penalty for missing class. I will post all lecture notes, and you are welcome to meet with me to go over any questions you have about either lecture or labs that you miss. Thank you for keeping us all safe!
+
+Questions: If you have a question during lecture, please raise your hand and ask it right away. Chances are that other students are wondering the same thing. If a question arises later, feel free to visit my office and we'll work through sample problems until you are comfortable with the mathematics.  Always feel free to ask me to slow down as well.
+
+Grading:  Your course grade will be based on two take-home exams (20% each), regular problem sets and labs (40%), and a final project (20%).
+
+Intellectual Responsibility
+
+Exams. Your work must be entirely your own, so please follow the guidelines of the Honor Code. Please carefully read the directions on the exam and follow them, asking me to clarify if the rules are not clear.
+Homework and other assignments. You may study with other students following these guidelines, again following the Honor Code:
+If you worked with or received help from any source other than me, you should put a note on the front of your homework saying, "I worked with <names>."  Make sure your name stands out as the author of your homework.
+Working together does not mean that one of you does the first half of the homework set and the other does the second. Everyone should work on every problem and write up their own solution (not copy from another student or source).
+Each student must hand in their own problem set on which they did their own write-up of each problem. Show all work; solutions with no work shown will be given no credit, and solutions that are direct copies from a solutions manual or other source will be treated as plagiarism.
+Do not copy someone else's solution—you will not learn anything and it is plagiarism.  I encourage you to discuss problems with others, but then you must be able to work out the solution on your own again and write it down yourself to ensure you truly understand it.
+Sending or receiving a copy of a file that contains student work violates the Honor Code and will be treated as plagiarism. You may talk with others about strategies for solving a problem in R, but please do not share files.
+If you are unsure what agrees or does not agree with the precepts of intellectual responsibility in this course, feel free to talk to me about it.
+Homework Guidelines
+
+All problem sets are due by the THE START OF CLASS in Gradescope.  Late homework will receive half credit for homework handed in after start of class but within 2 class days (e.g., homework due Monday will get half-credit if handed in after the start of class on Monday through Wednesday start of class, and will not accepted after that).
+If you are unable to attend class due to illness or an emergency, let me know as soon as you can and we will work out an appropriate schedule for assignments.
+Your name should be written on all pages, in case any get separated.
+Problem solutions must be written out in the order they were assigned.
+Multiple pages must be stapled or clipped together.
+Homework should be neat.  No dog ears.  No messy edges from notebook paper.
+Where appropriate, please box or highlight final answers.  In general, try to make your answers readable and easy to find.
+As mentioned elsewhere, no copying!
+Course Resources:
+
+Don't struggle alone! You have many options for getting help with this course.
+
+Me. Feel free to come to my office hours, make an appointment by email or phone, or simply try stopping by my office—you are welcome whenever my door is open.  If you have some anxiety about taking math exams, please come see me and we can work together on building your math confidence.
+Homework.  Mathematics is learned ACTIVELY, not passively.  You can't absorb math through listening or reading, even if you think you understand it all.
+Textbook. I won't go over everything that is contained in the text, and I will try to avoid doing the same examples.  Hence your textbook in an important independent source of information and you should read it!
+Lecture notes. Reviewing the notes you take in lecture will give you a chance to see the material again after you have had some time to assimilate it. 
+Your classmates. Discussing math with others can help you think through the concepts.  Explaining an idea you already understand will deepen your comprehension, and for the concepts that you don't understand well, the explanation of a peer may be more helpful than mine or the textbook's.
+Library and online resources. There are a variety of books covering probability and stochastic processes in the library that you may find it helpful to peruse, which can be very helpful if the textbook doesn't explain a topic in a way that makes sense to you or if you want to see some further examples. There are also many online resources explaining concepts and giving further examples that are easily found by searching for key terms.

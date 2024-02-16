@@ -1,0 +1,48 @@
+---
+title: "exercise solution 4.31"
+output: pdf_document
+author: Dhyey Mavani
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown for the problem by Dhyey Mavani
+
+```{r}
+# defining the branch function
+branch <- function(n) {
+  z <- c(1,rep(0,n))
+  for (i in 2:(n+1)) {
+    z[i] <- sum(sample(0:4, z[i-1], replace=T))
+  }
+  return (z)
+}
+```
+
+```{r}
+# simulation 1 is about 3rd generation extinction
+# simulation 2 is about the long term extinction
+
+num_trials <- 70000
+
+sim1 <- numeric(num_trials) 
+sim2 <- numeric(num_trials)
+
+for (i in 1:num_trials) {
+  out <- branch(10)
+  sim1[i] <- if (out[4]==0) 1 else 0 
+  sim2[i] <- if (out[11] == 0) 1 else 0
+}
+
+mean(sim1) # this mean is P(Z_3 = 0)
+
+mean(sim2) # this mean signifies extinction probability e
+
+pgf <- function(s) (1/5)*(1+s+s^2+s^3+s^4)
+
+# this represents G_3(0) which should be indeed similar to P(Z_3 = 0)
+pgf(pgf(pgf(0))) 
+
+```

@@ -1,0 +1,201 @@
+---
+title: "Branching Processes"
+author: "Math 365 Dhyey Mavani and Prof. Leise"
+date: "March 10, 2022"
+output: pdf_document
+---
+
+Submit the pdf knit from your completed lab to Gradescope.
+
+The objective of this lab is to examine some examples of Galton-Watson branching processes more closely to determine their long-term behavior and properties. In the 1870s Francis Galton posed a question about the probability of aristocratic surnames becoming extinct, and a solution was proposed by the Reverend Henry William Watson. Together they published a paper introducing a branching process to model patrilineal propagation of aristocratic family names. The same process was reinvented by Leo Szilard (who spurred the creation of the Manhattan Project) in the 1930s to model the proliferation of free neutrons in a nuclear fission reaction.
+
+Assume $Z_n$ is a branching process with $Z_0=1$, where $a_k$ is the probability of an individual having $k$ offspring.
+
+### Supercritical case $\mu>1$
+
+Choose positive values for $a_0$, $a_1$, and $a_2$ satisfying $a_0+a_1+a_2=1$ (so $a_n=0$ for $n\ge3$) such that the expected number of offspring of an individual is greater than 1.
+
+```{r}
+a <- c(.6,.3,.2) # probability of 0, 1, or 2 offspring (change these values to your choice)
+mu <- sum((0:(length(a)-1))*a) # expected number of offspring
+mu
+```
+
+(1) State your values of $a_0$, $a_1$, and $a_2$ and the resulting value of $\mu$. 
+
+Ans: $a_0 = 0.3$, $a_1 = 0.3$, and $a_2 = 0.4$ and the resulting value of $\mu = 1.1$. 
+
+```{r}
+a <- c(.3,.3,.4) # probability of 0, 1, or 2 offspring (change these values to your choice)
+mu <- sum((0:(length(a)-1))*a) # expected number of offspring
+mu
+```
+
+(2) Calculate the extinction probability.
+
+Ans: The extinction probability $e = 0.75$
+
+```{r}
+G <- function(s) a[1]+a[2]*s+a[3]*s^2
+
+# extinction probability e
+polyroot(c(a[1],a[2]-1,a[3]))
+```
+
+(3) Run several simulations using the code below and your values of $a_0$, $a_1$, and $a_2$ entered above. You should observe "boom or bust" behavior (rapid extinction or population explosion).
+
+```{r}
+# graph sample chain -- run multiple times to observe
+# extinction vs population explosion
+nsteps<-20
+Z<-matrix(0,nsteps,1)
+Z[1]<-1
+for(n in 2:nsteps) {
+  ifelse(Z[n-1]>0,
+     Z[n]<-sum(sample(0:(length(a)-1),Z[n-1],replace=TRUE,a)),
+     Z[n]<-0)
+}
+plot(0:(nsteps-1),Z,type="l",xlab="Generation",ylab="Population",
+     main="Branching process")
+```
+
+### Subcritical case $\mu<1$
+
+Choose positive values for $a_0$, $a_1$, and $a_2$ satisfying $a_0+a_1+a_2=1$ (so $a_n=0$ for $n\ge3$) such that the expected number of offspring of an individual is less than 1. 
+
+
+```{r}
+a <- c(.5,.3,.2) # probability of 0, 1, or 2 offspring (change these values to your choice)
+mu <- sum((0:(length(a)-1))*a) # expected number of offspring
+mu
+```
+
+(1) State your values of $a_0$, $a_1$, and $a_2$ and the resulting value of $\mu$.
+
+Ans: values of $a_0 = 0.5$, $a_1 = 0.3$, and $a_2 = 0.2$ and the resulting value of $\mu = 0.7$.
+
+(2) Calculate the extinction probability.
+
+Ans: The extinction probability $e = 1$
+
+```{r}
+G <- function(s) a[1]+a[2]*s+a[3]*s^2
+# take the smallest positive root
+# extinction probability e
+polyroot(c(a[1],a[2]-1,a[3]))
+```
+
+(3) Run several simulations using these values of $a_0$, $a_1$, and $a_2$. You should observe eventual extinction with probability 1.
+
+```{r}
+nsteps<-20
+Z<-matrix(0,nsteps,1)
+Z[1]<-1
+for (n in 2:nsteps) {
+  ifelse(Z[n-1]>0,
+     Z[n]<-sum(sample(0:(length(a)-1),Z[n-1],replace=TRUE,a)),
+     Z[n]<-0)
+}
+plot(Z,type="l",xlab="Generation",ylab="Population",
+     main="Branching process")
+```
+
+(4) The expected time to extinction $T$ can be calculated via
+$\mathbb{E}(T)=1+\sum_{n=1}^\infty{(1-s_n(1))}$, where we can recursively calculate the probability of extinction at time $n$ using $s_{n}(1)=G(s_{n-1}(1))$ with $s_1(1)=G(0)$. Here $G(s)=\sum_{k=0}^\infty{a_ks^k}$ is the generating function and $s_n(1)=G_n(0)$ is the probability of extinction by step $n$. We can calculate these values using a for-loop, then examine a plot to check convergence:
+
+```{r}
+G <- function(s) a[1]+a[2]*s+a[3]*s^2
+niteration <- 100
+s <- matrix(0,niteration+1,1)
+s[1]<-G(0)
+for (n in 1:niteration) s[n+1] <- G(s[n])
+plot(1:(niteration+1),s, xlab="n", ylab="s_n(1)", ylim=c(0,1),type="l")
+```
+
+You should observe the $s_n(1)$ converging to the extinction probability $e$, which is a fixed point of the iteration. 
+
+Next compute partial sums of $\mathbb{E}(T)=1+\sum_{n=1}^\infty{(1-s_n(1))}$ and plot them to check convergence of the infinite series:
+
+```{r}
+plot(1:(niteration+1),1+cumsum((1-s[1:(niteration+1)])),
+     xlab="n", ylab="Partial sum for mean extinction time",type="l")
+```
+
+What do you estimate $\mathbb{E}(T)$ to be, based on your graph?
+
+Ans: I observe the $\mathbb{E}(T) = 2.4$ throught the graph above.
+### Critical case $\mu=1$
+
+Choose positive values for $a_0$, $a_1$, and $a_2$ satisfying $a_0+a_1+a_2=1$ (so $a_n=0$ for $n\ge3$) such that the expected number of offspring of an individual equals 1. 
+
+```{r}
+a <- c(.3,.4,.3) # probability of 0, 1, or 2 offspring (change these values to your choice)
+mu <- sum((0:(length(a)-1))*a) # expected number of offspring
+mu
+```
+
+(1) State your values of $a_0$, $a_1$, and $a_2$ and the resulting value of $\mu$.
+
+Ans: Values of $a_0 = 0.3$, $a_1 = 0.4$, and $a_2 = 0.3$ and the resulting value of $\mu = 1$.
+
+(2) Calculate the extinction probability.
+
+Ans: The extinction probability $e = 1$
+
+```{r}
+G <- function(s) a[1]+a[2]*s+a[3]*s^2
+
+# extinction probability e
+polyroot(c(a[1],a[2]-1,a[3]))
+```
+
+(3) Run several simulations using these values of $a_0$, $a_1$, and $a_2$. What do you observe for this borderline case?
+
+Ans: There might be a boom for some time intially, but this would eventually get to extinction as we can see after running the simulation multiple times. After all, this is what was expected because the extinction probability is 1.
+
+```{r}
+nsteps<-20
+Z<-matrix(0,nsteps,1)
+Z[1]<-1
+for (n in 2:nsteps) {
+  ifelse(Z[n-1]>0,
+     Z[n]<-sum(sample(0:(length(a)-1),Z[n-1],replace=TRUE,a)),
+     Z[n]<-0)
+}
+plot(Z,type="l",xlab="Generation",ylab="Population",
+     main="Branching process")
+```
+
+(4) Calculate the $s_n(1)$ for this case, imitating the code above, and then plot the partial sums of the infinite series $\mathbb{E}(T)=1+\sum_{n=1}^\infty{(1-s_n(1))}$. What do you observe?
+
+```{r}
+# plotting and calculating s_n(1)
+G <- function(s) a[1]+a[2]*s+a[3]*s^2
+niteration <- 1000
+s <- matrix(0,niteration+1,1)
+s[1]<-G(0)
+for (n in 1:niteration) s[n+1] <- G(s[n])
+plot(1:(niteration+1),s, xlab="n", ylab="s_n(1)", ylim=c(0,1),type="l")
+
+# plotting and calculating the partial sums
+niteration <- 1000
+plot(1:(niteration+1),1+cumsum((1-s[1:(niteration+1)])),
+     xlab="n", ylab="Partial sum for mean extinction time",type="l")
+```
+
+(5) The expected extinction time is infinite for this critical case, even though the extinction probability $e$ is 1. The reason is that $1-s_n(1) \sim C/n$ for large $n$. Verify that this occurs for your example by estimating the value of $C$ from a plot of $n(1-s_n(1))$:
+
+```{r}
+plot(1:niteration,(1:niteration)*(1-s[2:(niteration+1)]), xlab="n", ylab="n(1-s_n(1))",type="l")
+```
+
+The theoretically derived value is $C=2/\sigma^2$, where $\sigma^2$ is the variance $\sum_{k=0}^\infty{a_k(k-\mu)^2}$.
+
+```{r}
+variance <- a[1]*(0-mu)^2+a[2]*(1-mu)^2+a[3]*(2-mu)^2
+theor_C <- 2/variance
+print("The variance is ") 
+variance
+print("The theor_C is ") 
+theor_C
+```

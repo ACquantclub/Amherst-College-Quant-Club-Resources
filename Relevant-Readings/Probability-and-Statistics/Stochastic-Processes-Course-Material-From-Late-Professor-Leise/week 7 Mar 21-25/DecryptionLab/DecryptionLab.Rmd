@@ -1,0 +1,204 @@
+---
+title: "Decryption using MCMC"
+author: "Math 365"
+date: "March 24, 2022"
+output:
+  html_document: default
+---
+
+Submit your completed lab to Gradescope.
+
+In this lab we will explore an application of the Metropolis-Hastings algorithm as an example of applying MCMC methods to decode a simple encryption scheme, as described in Dobrow Example 5.3. 
+
+## Adrbzf Fmysxbqdec Aykfrf (Simple Encryption Scheme)
+
+We can code a message using a simple substitution cipher: each letter stands for a different letter in the alphabet, for example replace $s$ with $a$, $i$ with $d$, $m$ with $r$, etc, as was done in the title of this section.  To decode a message, one could try all possible permutations of the alphabet (all the possible ciphers if we ignore all punctuation, numbers, and other symbols in the text), but that would require $27!\approx10^{28}$ tests to see which yields a sensible answer, which is computationally infeasible.
+
+A more efficient approach is to narrow down the likely candidates by noting that certain pairs of letters tend to occur with much higher frequency than others. If we know the typical transition probabilities of successive letter pairs, we can use that to help determine the cipher. For example, take a large set of writings (the "reference text"), count the number of times each possible letter pair occurs (including spaces, but ignoring all other punctuation). Dobrow used the complete works of Jane Austen to generate such a count, stored in a $27\times 27$ matrix $M$. For instance, the entry in the 1st row and 2nd column of $M$ gives the number of times $a$ was immediately followed by $b$.
+
+### Step 1
+
+Download the file AustenCount.txt which contains the counts of successive pairs of letters in the reference text, and save in the same folder as your R markdown file. Set the working directory in RStudio to this folder (using the Files tab or setwd("pathtofolder")), and then load the data matrix $M$ into R:
+
+```{r}
+M <- read.table("AustenCount.txt",header=F)
+logM <- log(M + 1) # easier to compute product as sum of logs
+```
+
+### Step 2
+
+Download EncryptedMessage.txt and save to the same folder as the other files, and then read the encrypted message into RStudio:
+
+```{r}
+fileName <- "EncryptedMessage.txt"
+codemess <-readChar(fileName, file.info(fileName)$size)
+```
+
+For each coding function $f$ mapping the coded letters back to the original letters, we can compute a score that quantifies how well the letter pair frequencies in the candidate decoded message (using $f$ to decode) matches the observed frequencies, where $N$ is the number of letters and spaces in the coded message $c_1c_2\dots c_N$, treated as a string of characters:
+$$\text{score}(f)=\prod_{i=1}^{N-1}{M_{f(c_i),f(c_{i+1})}}.$$
+Coding functions $f$ with high scores are good candidates for decryption because the score is higher when successive pair frequencies in the decoded message more closely match those in the reference text (think about this to make sure it makes sense to you).
+
+We can define a probability distribution proportional to the scores as follows:
+$$\pi(f)=\frac{\text{score}(f)}{\sum_g{\text{score}(g)}}.$$
+We want to sample from $\pi$, but the denominator in this expression has $27!$ terms to sum, which sounds intractable. But we are saved by the fact that the Metropolis-Hastings formula involves a ratio $\pi(f^\ast)/\pi(f)$, so the denominator cancels out.
+
+### Step 3
+
+Working with the logarithm of the score is computationally easier. Define a function to calculate the log-score in R (later we apply exp to undo the log):
+
+```{r}
+score <- function(code) {  # sum logs of frequencies of pairs 
+  p <- 0
+  for (i in 1:(nchar(code)-1)) {
+    p <- p + logM[charIndex(substr(code, i, i)),charIndex(substr(code, i+1, i+1))]
+  }
+  p } # returns p=log(score(code))
+```
+	
+### Step 4
+
+We also need some functions to convert letters and spaces into numbers, and to translate a coded message using a given code. The script ScriptForEncryptionLab.R with these functions should be downloaded from the course webpage and stored in the same folder as the other files for this lab.
+
+```{r}
+source("ScriptForEncryptionLab.R")
+```
+
+## Metropolis algorithm
+
+The Metropolis algorithm applied to this problem has the following steps:
+
+(i) Start with any $f$, say, the identify function that maps $a$ to $a$, $b$ to $b$, etc.
+
+(ii) As a convenient symmetric Markov chain to use here, pick two letters uniformly at random and switch the values that $f$ assigns to these two symbols. Call this proposal state $f^\ast$.
+
+(iii) Compute the acceptance function
+$$a(f,f^\ast)=\frac{\pi(f^\ast)}{\pi(f)}=\frac{\text{score}(f^\ast)}{\text{score}(f)}.$$
+
+(iv) Pick a uniformly distributed random number $u$ between 0 and 1. If $u\le a(f,f^\ast)$, accept $f^\ast$; otherwise remain at $f$.
+
+This algorithm generates a Markov chain with equilibrium distribution $\pi$. The $f$ that will occur most frequently as the chain runs is the one with the largest value of $\pi(f)$, which is the one with the greatest score. So we watch the chain for a sufficiently long time to see which $f$ occurs the most often, and take it as the most likely coding function to decode the message. 
+
+We can monitor the chain as it runs, to see how well the current candidate for $f$ does in decoding the message. We can stop the chain once the decoded message no longer has any gibberish.
+
+### Exercise 1
+
+Run the R script to decipher the encrypted text. What is the decoded text?  
+
+```{r}
+curFunc <- 1:27 # uniform mapping
+# calculate the score for curFunc
+oldScore <- score(decrypt(codemess,curFunc))
+
+# run 2000 iterations of the Metropolis-Hastings algorithm
+for (iteration in 1:2500) {
+  # sample two letters to swap (we didn't change spaces in this example)
+  swaps <- sample(1:26,2) # leaving spaces fixed
+  oldFunc <- curFunc
+  
+  # let curFunc be oldFunc but with two letters swapped
+  curFunc[swaps[1]] <- oldFunc[swaps[2]]
+  curFunc[swaps[2]] <- oldFunc[swaps[1]]
+  
+  newScore <- score(decrypt(codemess,curFunc))
+  
+  # decide whether to accept curFunc or to revert to oldFunc
+  if (runif(1) > exp(newScore-oldScore)) {
+    curFunc <- oldFunc
+  } else  {
+    oldScore <- newScore
+  }
+  
+  # print out our decryption every 50 iterations
+  if ((iteration %%  500) == 0) {
+    print(iteration)
+    print(decrypt(codemess,curFunc))
+  }
+}
+```
+	
+## Exercise 2 
+
+Experiment with a text snippet of your choosing. For instance, how well does this method perform if the text is rather short, only a few words? Or from a different writing style than Austen?	
+
+Here is an example showing how to create an encrypted message with a randomly generated cipher:
+
+Ans: Below, I am running the algorithm of encryption and decryption on different text excerpts. We can say tht it will be easily able to encrypt and decrypt the Austen's text, but when we reduce the length of the message then it might get disrupted. Moreover, if we use Jane Austen's Biography from wikipedia, it does a better job which makes sense as the contents tend to be more relatable to the encryption scheme.
+
+```{r}
+message <- "life seems but a quick succession of busy nothings There is no win or loose if you have the right mindset and get through it"
+cipher <- sample(1:26)
+codemess <- decrypt(message,cipher)
+codemess
+```
+```{r}
+curFunc <- 1:27 # uniform mapping
+# calculate the score for curFunc
+oldScore <- score(decrypt(codemess,curFunc))
+
+# run 2000 iterations of the Metropolis-Hastings algorithm
+for (iteration in 1:2500) {
+  # sample two letters to swap (we didn't change spaces in this example)
+  swaps <- sample(1:26,2) # leaving spaces fixed
+  oldFunc <- curFunc
+  
+  # let curFunc be oldFunc but with two letters swapped
+  curFunc[swaps[1]] <- oldFunc[swaps[2]]
+  curFunc[swaps[2]] <- oldFunc[swaps[1]]
+  
+  newScore <- score(decrypt(codemess,curFunc))
+  
+  # decide whether to accept curFunc or to revert to oldFunc
+  if (runif(1) > exp(newScore-oldScore)) {
+    curFunc <- oldFunc
+  } else  {
+    oldScore <- newScore
+  }
+  
+  # print out our decryption every 50 iterations
+  if ((iteration %%  500) == 0) {
+    print(iteration)
+    print(decrypt(codemess,curFunc))
+  }
+}
+```
+
+```{r}
+message <- "When Austen was twenty Tom Lefroy a neighbour visited Steventon from December He had just finished a university degree and was moving to London for training as a barrister Lefroy and Austen would have been introduced at a ball or other neighbourhood social gathering and it is clear from Austens letters to Cassandra that they spent considerable time together I am almost afraid to tell you how my Irish friend and I behaved Imagine to yourself everything most profligate and shocking in the way of dancing and sitting down together Austen wrote in her first surviving letter to her sister Cassandra that Lefroy was a very gentlemanlike good-looking pleasant young man Five days later in another letter Austen wrote that she expected an offer from her friend and that I shall refuse him however unless he promises to give away his white coat going on to write I will confide myself in the future to Mr Tom Lefroy for whom I dont give a sixpence and refuse all others The next day Austen wrote The day will come on which I flirt my last with Tom Lefroy and when you receive this it will be all over My tears flow as I write at this melancholy idea"
+cipher <- sample(1:26)
+codemess <- decrypt(message,cipher)
+codemess
+```
+
+```{r}
+curFunc <- 1:27 # uniform mapping
+# calculate the score for curFunc
+oldScore <- score(decrypt(codemess,curFunc))
+
+# run 2000 iterations of the Metropolis-Hastings algorithm
+for (iteration in 1:2500) {
+  # sample two letters to swap (we didn't change spaces in this example)
+  swaps <- sample(1:26,2) # leaving spaces fixed
+  oldFunc <- curFunc
+  
+  # let curFunc be oldFunc but with two letters swapped
+  curFunc[swaps[1]] <- oldFunc[swaps[2]]
+  curFunc[swaps[2]] <- oldFunc[swaps[1]]
+  
+  newScore <- score(decrypt(codemess,curFunc))
+  
+  # decide whether to accept curFunc or to revert to oldFunc
+  if (runif(1) > exp(newScore-oldScore)) {
+    curFunc <- oldFunc
+  } else  {
+    oldScore <- newScore
+  }
+  
+  # print out our decryption every 50 iterations
+  if ((iteration %%  500) == 0) {
+    print(iteration)
+    print(decrypt(codemess,curFunc))
+  }
+}
+```
+
+Your message needs to be in all lower case without any punctuation or numbers.

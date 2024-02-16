@@ -1,0 +1,71 @@
+---
+title: "More Brownian Motion"
+author: "Math 365"
+date: "April 26, 2022"
+output: pdf_document
+header-includes:
+  - \usepackage{float, graphicx}
+---
+
+Submit your completed lab to Gradescope.
+
+In this lab we will do some further exploration of Brownian motion. 
+
+## Multi-Dimensional Brownian Motion
+
+Multi-dimensional Brownian motion can be constructed using independent one-dimensional Brownian motions for the coordinates of a vector-valued function $B_t=(B_t^{(1)}, \dots, B_t^{(n)})$. 
+
+### Exercise 1
+
+Update the R code from last week's lab to run simulations of 2-dimensional Brownian motion by generating two standard Brownian motions $X_t$ and $Y_t$. Plot the resulting path $(X_t,Y_t)$ in the $xy$-plane.
+
+```{r}
+duration <- 1  # total time
+numsteps <- 10000 # number of steps
+steps <- seq(0,1,duration/numsteps)
+deltax <- sample(c(-1,1),size=numsteps,replace=TRUE)/sqrt(numsteps)
+deltay <- sample(c(-1,1),size=numsteps,replace=TRUE)/sqrt(numsteps)
+x <- c(0, cumsum(deltax)) # compute cumulative sum
+y <- c(0, cumsum(deltay)) # compute cumulative sum
+plot(y, x, type = "l", main = "Random walk")
+```
+
+### Exercise 2 
+
+Add a third standard Brownian motion $Z_t$ to run simulations of 3-dimensional Brownian motion. Plot the resulting path using plot3D, which requires loading the plot3D package: in the RStudio window, click on Install in the Packages tab, then choose plot3D. It should then download and install the package; you may need to click on the box next to plot3D in the list of packages to actually load it.
+
+```{r}
+library("plot3D")
+
+duration <- 1  # total time
+numsteps <- 10000 # number of steps
+steps <- seq(0,1,duration/numsteps)
+deltax <- sample(c(-1,1),size=numsteps,replace=TRUE)/sqrt(numsteps)
+deltay <- sample(c(-1,1),size=numsteps,replace=TRUE)/sqrt(numsteps)
+deltaz <- sample(c(-1,1),size=numsteps,replace=TRUE)/sqrt(numsteps)
+x <- c(0, cumsum(deltax)) # compute cumulative sum
+y <- c(0, cumsum(deltay)) # compute cumulative sum
+z <- c(0, cumsum(deltaz)) # compute cumulative sum
+
+lines3D(x,y,z,ticktype="detailed",main="3D Brownian motion simulation",colkey=FALSE)
+```
+
+## Martingales and Brownian Motion
+
+For continuous-time stochastic processes, we say that $(Y_t)_{t\ge0}$ is a martingale with respect to stochastic process $(X_t)_{t\ge0}$ if for all $t\ge0$ we have $E(Y_t\,|\, Y_r, 0\le r\le s)=E(Y_s)$ for all $0\le s\le t$ and $E(|Y_t|)<\infty$.
+
+Geometric Brownian motion can be defined as
+ $$G_t=e^{\,\mu t+\sigma B_t},$$ 
+ where $B_t$ is a standard Brownian motion.
+ 
+### Exercise 3
+
+Show that $e^{-(\mu+\sigma^2/2)t}G_t$ is a martingale with respect to $(B_t)_{t\ge0}$
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{3.jpeg}
+  \end{center}
+  \caption{Problem 3}
+  \label{Problem 3}
+\end{figure}
