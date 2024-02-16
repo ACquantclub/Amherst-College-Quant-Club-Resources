@@ -1,3 +1,3 @@
-# Amherst-College-Quant-Club-Resources
+# Amherst College Quant Club Resources
 
-For more, refer https://aman.ai
+For more ML/AI resources, refer https://aman.ai
