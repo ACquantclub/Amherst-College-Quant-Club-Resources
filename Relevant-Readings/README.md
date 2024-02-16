@@ -138,3 +138,4 @@ Old materials, which were previously spread out across multiple drives, can be f
 
 ## Online Resources
 - Famous e136 course from Harvey-Mudd: https://www.palmislandtraders.com/econ136/e136ls.htm
+- Aman's AI resources: https://aman.ai
