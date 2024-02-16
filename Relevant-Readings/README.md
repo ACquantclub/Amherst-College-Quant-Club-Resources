@@ -1,5 +1,7 @@
 # Relevant Readings (Old and New Combined)
 
+Old materials, which were previously spread out across multiple drives, can be found in the respective folders here. Below, we collect a list of topic-wise books and reference materials that can help you in your quantitative journey!
+
 ## General Finance Textbooks
 - Options, Futures and Other Derivatives, John Hull
 - The Concepts and Practice of Mathematical Finance, Mark Joshi
@@ -35,6 +37,7 @@
 - The Volatility Surface, Jim Gatheral
 - Stochastic Volatility Modeling, Lorenzo Bergomi
 - Dynamic Hedging: Managing Vanilla and Exotic Options, Nassim Nicholas Taleb
+- A Machine Learning based Pairs Trading Investment Strategy (SpringerBriefs in Applied Sciences and Technology)
 - Option Volatility & Pricing, Sheldon Natenberg
 - Option Valuation Under Stochastic Volatility: With Mathematica Code, Alan L. Lewis
 
@@ -68,6 +71,7 @@
 
 ## Quantitative Risk Management
 - Quantitative Risk Management: Concepts, Techniques and Tools, Alexander J. McNeil, Rudiger Frey, and Paul Embrechts
+- Active Portfolio Management by Kahn and Grinold
 
 ## Mathematics
 ### Probability and Stochastic Processes:
@@ -77,6 +81,7 @@
 - Stochastic Differential Equations, Bernt Oksendal
 - Diffusions Markov Processes and Martingales, L. C. G. Roger and D. Williams
 - 50 Challenging Problems in Probability
+- Richard Durrett, Essentials of Stochastic Processes
 
 ### Statistics:
 
@@ -110,6 +115,7 @@
 - Heard on the Street: Quantitative Questions from Wall Street Job Interviews, Timothy Crack
 - 150 Most Frequently Asked Questions on Quant Interviews, Dan Stefanica, Radoš Radoičić, and Tai-ho Wang
 - An Interview primer for quantitative finance, Dirk Bester
+- Frequently Asked Questions in Quantitative Finance by Paul Wilmott
 
 ## Being a Quant
 - My Life as a Quant: Reflections on Physics and Finance, Emanuel Derman
@@ -121,3 +127,4 @@
 - Reminiscences of a Stock Operator, Jesse Livermore
 - Liar’s Poker, Michael Lewis
 - Against the Gods, Peter Bernstein
+- Give and Take by Adam Grant
