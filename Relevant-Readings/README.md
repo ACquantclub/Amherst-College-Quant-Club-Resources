@@ -6,6 +6,7 @@ Old materials, which were previously spread out across multiple drives, can be f
 - Options, Futures and Other Derivatives, John Hull
 - The Concepts and Practice of Mathematical Finance, Mark Joshi
 - Paul Wilmott on Quantitative Finance, Paul Wilmott
+- High-Frequency Trading, A Practical Guide to Algorithmic Strategies and Trading Systems
 
 ## Asset Pricing
 - Asset Pricing (Revised Edition), Cochrane, John H. Princeton University Press, 2009.
@@ -31,6 +32,9 @@ Old materials, which were previously spread out across multiple drives, can be f
 
 ## Asset Classes
 
+### ETFs:
+- ETF The Handbook: How to Value and Trade Exchange-Trader Funds by David Abner
+  
 ### Equity Derivatives:
 - Equity derivatives, Marcus Overhaus et al.
 - Equity Hybrid Derivatives, Marcus Overhaus et al.
@@ -90,6 +94,7 @@ Old materials, which were previously spread out across multiple drives, can be f
 - Time Series Analysis, James Hamilton
 - The econometrics of financial markets, Campbell, John Y., Andrew Wen-Chuan Lo, and Archie Craig MacKinlay. Vol. 2. Princeton, NJ: Princeton University Press, 1997.
 - The Elements of Statistical Learning, Hastie, Tibshirani and Friedman
+- An Introduction to Statistical Learning by Hastie, Tibshirani
 - Handbook of Markov Chain Monte Carlo, Brooks, Steve, Gelman, Andrew, Jones, Galin , and Meng, Xiao-Li.
 - Analysis of Financial Time Series, Ruey S. Tsay
 
@@ -98,6 +103,8 @@ Old materials, which were previously spread out across multiple drives, can be f
 - Pattern Recognition and Machine Learning, Christopher Bishop
 - Reinforcement Learning: An introduction, Richard S. Sutton and Andrew G. Barto
 - Advances in Financial Machine Learning, Marcos Lopez de Prado
+- Machine Learning for Asset Managers (Elements in Quantitative Finance) by Marcos M. López de Prado
+- Statistical and Machine-Learning Data Mining Techniques for Better Predictive Modeling and Analysis of Big Data by Bruce Ratner
 
 ### Linear Algebra:
 - Linear Algebra by Gilbert Strang
