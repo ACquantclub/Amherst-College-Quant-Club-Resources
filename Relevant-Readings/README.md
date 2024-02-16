@@ -135,3 +135,6 @@ Old materials, which were previously spread out across multiple drives, can be f
 - Liar’s Poker, Michael Lewis
 - Against the Gods, Peter Bernstein
 - Give and Take by Adam Grant
+
+## Online Resources
+- Famous e136 course from Harvey-Mudd: https://www.palmislandtraders.com/econ136/e136ls.htm
