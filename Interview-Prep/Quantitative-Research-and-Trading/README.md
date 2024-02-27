@@ -7,3 +7,4 @@ More resources are as follows:
 - https://dev.samarthgoel.com/blog/post/full-stack
 - https://dev.samarthgoel.com/blog/post/crypto-beginners
 - https://dev.samarthgoel.com/blog/post/crypto-resources
+- https://dev.samarthgoel.com/blog/post/ride-share-blockchain
