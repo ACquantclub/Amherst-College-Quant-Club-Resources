@@ -76,6 +76,7 @@ Old materials, which were previously spread out across multiple drives, can be f
 ## Quantitative Risk Management
 - Quantitative Risk Management: Concepts, Techniques and Tools, Alexander J. McNeil, Rudiger Frey, and Paul Embrechts
 - Active Portfolio Management by Kahn and Grinold
+- Quantitative Portfolio Management: The Art and Science of Statistical Arbitrage 1st Edition
 
 ## Mathematics
 ### Probability and Stochastic Processes:
