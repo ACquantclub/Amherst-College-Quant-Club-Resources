@@ -42,3 +42,21 @@
 - Unit Testing Principles, Practices, and Patterns (Vladimir Khorikov)
 - Xunit
 - xUnit Test Patterns
+
+## Integration and Release
+
+- Apache Ant
+- Apache Ant Tutorial
+- Apache Maven Project
+- Configuration Management Principles and Practice
+- Continuous Delivery
+- Development and build system with ant Making "Push on Green" a Reality
+
+## Monitoring and Maintenance
+
+- Amazon Cloudwatch
+- Dapper, a Large-Scale Distributed Systems Tracing Infrastructure
+- Kubernetes
+- Prometheus
+- StackDriver
+- Weathering the Unexpected
