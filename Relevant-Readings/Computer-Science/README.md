@@ -10,6 +10,7 @@
 ### Small Feature-based full-stack flavored Online Assessments prep
 
 - Byteboard
+- https://automatetheboringstuff.com
 
 ### System Design Roadmap:
 0. [𝐍𝐞𝐰𝐬𝐥𝐞𝐭𝐭𝐞𝐫] System Design Newsletter (by Neo K.) https://newsletter.systemdesign.one/?utm_source=navbar&utm_medium=web&r=2tt34d
