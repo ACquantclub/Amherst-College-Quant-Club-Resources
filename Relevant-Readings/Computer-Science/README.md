@@ -1,5 +1,7 @@
 # Computer Science Resources
 
+- The Missing Semester of Your CS Education: https://missing.csail.mit.edu (For gaining experience in some practical tools)
+
 ### Data Structures and Algorithms Problems Practice
 
 - Leetcode
