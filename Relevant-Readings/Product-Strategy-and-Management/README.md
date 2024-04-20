@@ -1,0 +1,23 @@
+# Resources for Product Strategy and Management 
+
+- https://sachinrekhi.com
+- https://www.svpg.com/inspired-product-management-workshop/
+- https://www.intercom.com/blog/product-and-design
+- https://medium.com/the-year-of-the-looking-glass
+- https://hbr.org/2017/12/what-it-takes-to-become-a-great-product-manager
+- https://techbootcamps.utexas.edu/blog/how-to-become-a-product-manager/
+- https://medium.com/the-year-of-the-looking-glass/what-to-expect-from-pms-part-2-191a89b42d7d
+- https://medium.com/swlh/how-to-get-a-job-in-product-management-out-of-college-34ff53e5bf99
+- https://www.svpg.com/books/inspired-how-to-create-tech-products-customers-love-2nd-edition/
+- https://paulgraham.com/articles.](https://paulgraham.com/articles.html
+- https://automatetheboringstuff.com
+- High Output Management
+- The Manager’s Path: A Guide for Tech Leaders Navigating Growth & Change
+- Never Split the Difference: Negotiating as if your life depended on it by Chris Voss
+- How to Win Friends and Influence People by Dale Carnegie
+- Getting Things Done: Art of Stress-Free Productivity by David Allen
+- Good to Great: Why Some companies make the Leap and Others Don’t by Jim Collins
+- The Courage to Be Disliked: The Japanese Phenomenon That Shows You How to Change Your Life and Achieve Real Happiness
+- Influence: The Psychology of Persuasion by Robert Cialdini
+- Ego is the Enemy by Ryan Holiday
+- Eric Weinstein Podcasts (from Thiel Capital)  
