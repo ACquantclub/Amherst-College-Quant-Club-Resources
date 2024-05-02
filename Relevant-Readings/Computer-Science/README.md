@@ -14,6 +14,18 @@
 - Byteboard
 - https://automatetheboringstuff.com
 
+### Some Helpful GitHub Repositories
+
+1) System design: https://github.com/systemdesign42/system-design
+2) Tech interview handbook: https://github.com/yangshun/tech-interview-handbook
+3) Developer roadmaps: https://github.com/kamranahmedse/developer-roadmap
+4) Path to senior engineer handbook: https://github.com/jordan-cutler/path-to-senior-engineer-handbook
+5) Free programming books: https://github.com/EbookFoundation/free-programming-books
+6) Coding challenges: https://github.com/CodingChallengesFYI/SharedSolutions
+7) Awesome behavioral interviews: https://github.com/ashishps1/awesome-behavioral-interviews
+8) Freecodecamp: https://github.com/freeCodeCamp/freeCodeCamp
+9) Engineering leadership resources: https://github.com/gregorojstersek/resources-to-become-a-great-engineering-leader
+
 ### System Design Roadmap:
 0. [𝐍𝐞𝐰𝐬𝐥𝐞𝐭𝐭𝐞𝐫] System Design Newsletter (by Neo K.) https://newsletter.systemdesign.one/?utm_source=navbar&utm_medium=web&r=2tt34d
 
