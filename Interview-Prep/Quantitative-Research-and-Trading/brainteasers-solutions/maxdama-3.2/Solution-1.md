@@ -20,7 +20,7 @@ $= \frac{1}{1\sqrt{5π}$
 then 
 $\frac{\sqrt{10}{1\sqrt{15.7}$
 
-$\frac{\sqrt{10}{1\sqrt{15.7} ≈ 0.1$
+$\frac{\sqrt{10}{1\sqrt{15.7} ≈ 0.1$ 
 
 ```python
 import random
