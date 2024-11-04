@@ -2,3 +2,7 @@
 ### Problem: XXX
 
 XXX
+
+```python
+import random
+```
