@@ -1,27 +1,57 @@
-# Solution 1
-### The question asks the probability of getting exactly 500 out of 1000 coin flips as heads within 5% without using a calculator
-Solution:
-Use the binomial formula, $\left(\frac{n!}{k!-(n-k)!}\right) * p^k * (1-p)^{n-k}$
+### Solution 1
 
-$\left(\frac{1000!}{500!-500!}\right) * \left(\frac{1}{2}\right)^{500} * \left(\frac{1}{2}\right)^{500}$
+The question asks for the probability of getting exactly 500 heads out of 1000 coin flips, within 5%, without using a calculator.
 
-$\left(\frac{1000!}{500!-500!}\right) * \left(\frac{1}{2}\right)^{1000} $
+**Solution:**  
+Use the binomial formula:
 
-To approximate factorials you can use Stirling's approximation
-$n! ≈ \sqrt{2πn} \left(\frac{n}{e}\right)^n$
+$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$
 
-plugging that in
+For our case:
 
-$≈ \frac{ \sqrt{2π(1000)} 1000^{1000} e^{500} e^ {500}}{\sqrt{2π(500)2π(500)} 500^{500} 500^{500} e^ {1000}} $
 
-$= \frac{1}{\sqrt{500π}$
+$P(X = 500) = \binom{1000}{500} \left(\frac{1}{2}\right)^{500} \left(\frac{1}{2}\right)^{500}$
 
-$= \frac{1}{1\sqrt{5π}$
-then 
-$\frac{\sqrt{10}{1\sqrt{15.7}$
+This simplifies to:
 
-$\frac{\sqrt{10}{1\sqrt{15.7} ≈ 0.1$ 
+$= \binom{1000}{500} \left(\frac{1}{2}\right)^{1000}$
+
+To approximate factorials, we can use Stirling's approximation:
+
+$
+n! \approx \sqrt{2 \pi n} \left(\frac{n}{e}\right)^n
+$
+
+Plugging this into the formula:
+
+$
+\approx \frac{\sqrt{2 \pi (1000)} \left(1000\right)^{1000} e^{-1000}}{\sqrt{2 \pi (500) \cdot 2 \pi (500)} \left(500\right)^{500} \left(500\right)^{500} e^{-1000}}
+$
+
+This further simplifies to:
+
+$
+= \frac{1}{\sqrt{500 \pi}}
+$
+
+$
+\approx \frac{1}{\sqrt{5 \pi}}
+$
+
+Which then approximates to:
+
+$
+\approx \frac{\sqrt{10}}{\sqrt{15.7}}
+$
+
+Finally,
+
+$
+\approx 0.1
+$
+
+Here’s the Python code to simulate the problem:
 
 ```python
 import random
-```
+``` 
