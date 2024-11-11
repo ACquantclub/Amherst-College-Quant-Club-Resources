@@ -18,37 +18,25 @@ $= \binom{1000}{500} \left(\frac{1}{2}\right)^{1000}$
 
 To approximate factorials, we can use Stirling's approximation:
 
-$
-n! \approx \sqrt{2 \pi n} \left(\frac{n}{e}\right)^n
-$
+$n! \approx \sqrt{2 \pi n} \left(\frac{n}{e}\right)^n$
 
 Plugging this into the formula:
 
-$
-\approx \frac{\sqrt{2 \pi (1000)} \left(1000\right)^{1000} e^{-1000}}{\sqrt{2 \pi (500) \cdot 2 \pi (500)} \left(500\right)^{500} \left(500\right)^{500} e^{-1000}}
-$
+$\approx \frac{\sqrt{2 \pi (1000)} \left(1000\right)^{1000} e^{-1000}}{\sqrt{2 \pi (500) \cdot 2 \pi (500)} \left(500\right)^{500} \left(500\right)^{500} e^{-1000}}$
 
 This further simplifies to:
 
-$
-= \frac{1}{\sqrt{500 \pi}}
-$
+$= \frac{1}{\sqrt{500 \pi}}$
 
-$
-\approx \frac{1}{\sqrt{5 \pi}}
-$
+$\approx \frac{1}{\sqrt{5 \pi}}$
 
 Which then approximates to:
 
-$
-\approx \frac{\sqrt{10}}{\sqrt{15.7}}
-$
+$\approx \frac{\sqrt{10}}{\sqrt{15.7}}$
 
 Finally,
 
-$
-\approx 0.1
-$
+$\approx 0.1$
 
 Here’s the Python code to simulate the problem:
 
